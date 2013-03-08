@@ -1,0 +1,58 @@
+﻿@model quiz_web.Models.student
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>student</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.username)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.username)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.identification)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.identification)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.lastname)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.lastname)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.password)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.password)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

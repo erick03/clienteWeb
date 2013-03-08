@@ -162,11 +162,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\professorController.cs" />
+    <Compile Include="Controllers\studentController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DbContex.cs" />
+    <Compile Include="Models\professors.cs" />
+    <Compile Include="Models\student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -237,6 +242,7 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\functions.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
@@ -290,6 +296,16 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_BootstrapLayout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\student\Index.cshtml" />
+    <Content Include="Views\student\Details.cshtml" />
+    <Content Include="Views\student\Create.cshtml" />
+    <Content Include="Views\student\Edit.cshtml" />
+    <Content Include="Views\student\Delete.cshtml" />
+    <Content Include="Views\professor\Index.cshtml" />
+    <Content Include="Views\professor\Details.cshtml" />
+    <Content Include="Views\professor\Create.cshtml" />
+    <Content Include="Views\professor\Edit.cshtml" />
+    <Content Include="Views\professor\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
