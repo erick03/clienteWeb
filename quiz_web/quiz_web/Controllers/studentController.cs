@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json;
 using quiz_web.Models;
 
 namespace quiz_web.Controllers
@@ -15,10 +19,50 @@ namespace quiz_web.Controllers
 
         //
         // GET: /student/
-
         public ActionResult Index()
         {
-            return View(db.students.ToList());
+            /*HttpWebRequest req = WebRequest.Create("http://localhost:3000/students.json")
+                      as HttpWebRequest;*/
+            student model;
+            //var projects = new LinkedList<IEnumerable<>>;
+            using (var client = new WebClient())
+            {
+                string json = client.DownloadString("http://localhost:3000/students.json");
+                var serializer = new JavaScriptSerializer();
+                model = serializer.Deserialize<student>(json);
+            }
+            /*
+            using (HttpWebResponse resp = req.GetResponse()
+                                          as HttpWebResponse)
+            {
+                StreamReader reader =
+                    new StreamReader(resp.GetResponseStream());
+                json = reader.ReadToEnd();
+            }*/
+            //var serializer = new JavaScriptSerializer();
+            //model = serializer.Deserialize<student>(json);
+            return View(model);//View(db.students.ToList());
+
+            /*using (var client = new WebClient())
+            {
+                string json = client.DownloadString(url + "/" + pID.ToString() + Formato);
+                var serializer = new JavaScriptSerializer();
+                model = serializer.Deserialize<Professor>(json);
+            }
+            return model;*/
+        }
+
+        public student all()
+        {
+            student model;
+            //var projects = new LinkedList<IEnumerable<>>;
+            using (var client = new WebClient())
+            {
+                string json = client.DownloadString("http://localhost:3000/students.json");
+                var serializer = new JavaScriptSerializer();
+                model = serializer.Deserialize<student>(json);
+            }
+            return model;
         }
 
         //
