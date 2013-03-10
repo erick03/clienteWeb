@@ -19,7 +19,6 @@ namespace quiz_web.Models
 
     public class professorsDBContext : DbContext
     {
-        //public DbSet<student> students { get; set; }
         public DbSet<professors> professor { get; set; } 
     }
 }

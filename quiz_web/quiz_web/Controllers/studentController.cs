@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using quiz_web.Models;
 
 namespace quiz_web.Controllers
@@ -16,55 +17,23 @@ namespace quiz_web.Controllers
     public class studentController : Controller
     {
         private studentsDBContext db = new studentsDBContext();
-
+        private string url = "http://localhost:3000/";
         //
         // GET: /student/
         public ActionResult Index()
         {
-            /*HttpWebRequest req = WebRequest.Create("http://localhost:3000/students.json")
-                      as HttpWebRequest;*/
-            student model;
-            //var projects = new LinkedList<IEnumerable<>>;
+            List<student> result;
             using (var client = new WebClient())
             {
-                string json = client.DownloadString("http://localhost:3000/students.json");
+                var json = client.DownloadString("http://localhost:3000/students.json");
                 var serializer = new JavaScriptSerializer();
-                model = serializer.Deserialize<student>(json);
+                result = serializer.Deserialize < List<student> > (json);
+                //var serializer = new JavaScriptSerializer();
+                //model = serializer.Deserialize<student>(json);
             }
-            /*
-            using (HttpWebResponse resp = req.GetResponse()
-                                          as HttpWebResponse)
-            {
-                StreamReader reader =
-                    new StreamReader(resp.GetResponseStream());
-                json = reader.ReadToEnd();
-            }*/
-            //var serializer = new JavaScriptSerializer();
-            //model = serializer.Deserialize<student>(json);
-            return View(model);//View(db.students.ToList());
 
-            /*using (var client = new WebClient())
-            {
-                string json = client.DownloadString(url + "/" + pID.ToString() + Formato);
-                var serializer = new JavaScriptSerializer();
-                model = serializer.Deserialize<Professor>(json);
-            }
-            return model;*/
+            return View(result);//(db.students.ToList());
         }
-
-        public student all()
-        {
-            student model;
-            //var projects = new LinkedList<IEnumerable<>>;
-            using (var client = new WebClient())
-            {
-                string json = client.DownloadString("http://localhost:3000/students.json");
-                var serializer = new JavaScriptSerializer();
-                model = serializer.Deserialize<student>(json);
-            }
-            return model;
-        }
-
         //
         // GET: /student/Details/5
 
