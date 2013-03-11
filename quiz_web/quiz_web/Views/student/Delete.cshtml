@@ -53,9 +53,23 @@
         @Html.DisplayFor(model => model.password)
     </div>
 </fieldset>
+<script type="text/javascript">
+$(document).ready(function () {
+$('#delete_student').on('click', function (e) {
+e.preventDefault();
+var dir = 'students/' + $('#puto input:first').val() + '.json';
+$.ajax({
+url: dir,
+type: 'delete'
+});
+});
+});
+</script>
 @using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+<p id="puto">
+<@Html.HiddenFor(model => model.ID)
+<input type="submit" value="Delete" id="delete_student"/> |
+@Html.ActionLink("Back to List", "Index")
+</p>
 }
+

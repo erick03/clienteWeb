@@ -15,8 +15,8 @@ namespace quiz_web.Models
         public string name { get; set; }
         public string lastname { get; set; }
         public string password { get; set; }
-        public string created_at { get; set; }
-        public string updated_at { get; set; }
+        /*public string created_at { get; set; }
+        public string updated_at { get; set; }*/
     }
 
     public class studentsDBContext : DbContext

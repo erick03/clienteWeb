@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using quiz_web.Models;
 
 namespace quiz_web.Controllers
@@ -12,13 +14,21 @@ namespace quiz_web.Controllers
     public class professorController : Controller
     {
         private professorsDBContext db = new professorsDBContext();
-
+        private string url = "http://localhost:3000/";
         //
         // GET: /professor/
 
         public ActionResult Index()
         {
-            return View(db.professor.ToList());
+            List<professors> result;
+            using (var client = new WebClient())
+            {
+                var json = client.DownloadString(url + "professors.json");
+                var serializer = new JavaScriptSerializer();
+                result = serializer.Deserialize<List<professors>>(json);
+            }
+            return View(result);
+            //return View(db.professor.ToList());
         }
 
         //
@@ -26,12 +36,25 @@ namespace quiz_web.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            professors professors = db.professor.Find(id);
+            professors professor = new professors();
+            using (var client = new WebClient())
+            {
+                var json = client.DownloadString(url + "professors/" + id.ToString() + ".json");
+                var serializer = new JavaScriptSerializer();
+                professor = serializer.Deserialize<professors>(json);
+            }
+            //student student = db.students.Find(id);
+            if (professor == null)
+            {
+                return HttpNotFound();
+            }
+            return View(professor);
+            /*professors professors = db.professor.Find(id);
             if (professors == null)
             {
                 return HttpNotFound();
             }
-            return View(professors);
+            return View(professors);*/
         }
 
         //
@@ -63,12 +86,26 @@ namespace quiz_web.Controllers
 
         public ActionResult Edit(int id = 0)
         {
+            professors professors = new professors();
+            using (var client = new WebClient())
+            {
+                //student = db.students.Find(id);
+                var json = client.DownloadString(url + "professors/" + id.ToString() + ".json");
+                var serializer = new JavaScriptSerializer();
+                professors = serializer.Deserialize<professors>(json);
+                if (professors == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            return View(professors);
+            /*
             professors professors = db.professor.Find(id);
             if (professors == null)
             {
                 return HttpNotFound();
             }
-            return View(professors);
+            return View(professors);*/
         }
 
         //
@@ -91,12 +128,26 @@ namespace quiz_web.Controllers
 
         public ActionResult Delete(int id = 0)
         {
+            professors professor = new professors();
+            using (var client = new WebClient())
+            {
+                //student = db.students.Find(id);
+                var json = client.DownloadString(url + "professors/" + id.ToString() + ".json");
+                var serializer = new JavaScriptSerializer();
+                professor = serializer.Deserialize<professors>(json);
+                if (professor == null)
+                {
+                    return HttpNotFound();
+                }
+            }
+            return View(professor);
+            /*
             professors professors = db.professor.Find(id);
             if (professors == null)
             {
                 return HttpNotFound();
             }
-            return View(professors);
+            return View(professors);*/
         }
 
         //
