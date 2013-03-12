@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace quiz_web.Models
 {
@@ -21,6 +22,36 @@ namespace quiz_web.Models
 
     public class studentsDBContext : DbContext
     {
-        public DbSet<student> students { get; set; }
+        private string url = "http://localhost:3000/students";
+        //public student student = new student();
+        private string data = ".json";
+
+        public List<student> info()
+        {
+            var json = new Enlace().EjecutarAccion(url+".json", "GET");
+            var serializer = new JavaScriptSerializer();
+            List<student> result = serializer.Deserialize<List<student>>(json);
+            return result;
+        }
+        public student find(int id)
+        {
+            var json = new Enlace().EjecutarAccion(url+"/"+id.ToString()+".json","GET");
+            //client.DownloadString(url + "students/" + id.ToString() + ".json");
+            var serializer = new JavaScriptSerializer();
+            student result = serializer.Deserialize<student>(json);
+            return result;
+        }
+        public student create(student student)
+        {
+            return new JavaScriptSerializer().Deserialize<student>(
+            new Enlace().EjecutarAccion(url + ".json", "POST", student));
+        }
+
+        public student edit(student student)
+        {
+            return new JavaScriptSerializer().Deserialize<student>(
+            new Enlace().EjecutarAccion(url +"/"+student.ID.ToString()+ data, "PUT", student));
+        }
+        //public DbSet<student> students { get; set; }
     }
 }

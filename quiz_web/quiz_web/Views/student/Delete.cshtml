@@ -53,18 +53,6 @@
         @Html.DisplayFor(model => model.password)
     </div>
 </fieldset>
-<script type="text/javascript">
-$(document).ready(function () {
-$('#delete_student').on('click', function (e) {
-e.preventDefault();
-var dir = 'students/' + $('#puto input:first').val() + '.json';
-$.ajax({
-url: dir,
-type: 'delete'
-});
-});
-});
-</script>
 @using (Html.BeginForm()) {
 <p id="puto">
 <@Html.HiddenFor(model => model.ID)
