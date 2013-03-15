@@ -11,51 +11,51 @@
 <fieldset>
     <legend>student</legend>
 
-    <div class="display-label">
+    <p class="text-info">
          @Html.DisplayNameFor(model => model.username)
-    </div>
-    <div class="display-field">
+    </p>
+    <p class="display-field">
         @Html.DisplayFor(model => model.username)
-    </div>
+    </p>
 
-    <div class="display-label">
+    <p class="text-info">
          @Html.DisplayNameFor(model => model.email)
-    </div>
-    <div class="display-field">
+    </p>
+    <p class="display-field">
         @Html.DisplayFor(model => model.email)
-    </div>
+    </p>
 
-    <div class="display-label">
+    <p class="text-info">
          @Html.DisplayNameFor(model => model.identification)
-    </div>
-    <div class="display-field">
+    </p>
+    <p class="display-field">
         @Html.DisplayFor(model => model.identification)
-    </div>
+    </p>
 
-    <div class="display-label">
+    <p class="text-info">
          @Html.DisplayNameFor(model => model.name)
-    </div>
-    <div class="display-field">
+    </p>
+    <p class="display-field">
         @Html.DisplayFor(model => model.name)
-    </div>
+    </p>
 
-    <div class="display-label">
+    <p class="text-info">
          @Html.DisplayNameFor(model => model.lastname)
-    </div>
-    <div class="display-field">
+    </p>
+    <p class="display-field">
         @Html.DisplayFor(model => model.lastname)
-    </div>
+    </p>
 
-    <div class="display-label">
+    <p class="text-info">
          @Html.DisplayNameFor(model => model.password)
-    </div>
-    <div class="display-field">
+    </p>
+    <p class="display-field">
         @Html.DisplayFor(model => model.password)
-    </div>
+    </p>
 </fieldset>
 @using (Html.BeginForm()) {
 <p id="puto">
-<@Html.HiddenFor(model => model.ID)
+@Html.HiddenFor(model => model.ID)
 <input type="submit" value="Delete" id="delete_student"/> |
 @Html.ActionLink("Back to List", "Index")
 </p>

@@ -8,9 +8,9 @@
 <h2>Students</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-info btn-mini" })
 </p>
-<table class ="table">
+<table class ="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.username)
@@ -54,9 +54,9 @@
             @Html.DisplayFor(modelItem => item.password)
         </td>
         <td>
-            @Html.ActionLink("Edit","Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit",new { id = item.ID },new { @class = "btn btn-primary btn-mini"}) |
+            <!--@Html.ActionLink("Details", "Details", new { id=item.ID }) |-->
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-mini" })
         </td>
     </tr>
 }

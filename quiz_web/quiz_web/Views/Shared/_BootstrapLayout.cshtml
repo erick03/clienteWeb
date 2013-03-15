@@ -45,6 +45,7 @@
                 <li ><a href="#">Home</a></li>
                 <li >@Html.ActionLink("Students","Index", "student")</li>
                 <li >@Html.ActionLink("Professors", "Index", "professor")</li>
+                <li >@Html.ActionLink("Course", "Index", "Course")</li>
                 <li ><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -82,16 +83,16 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Programacion en ambiente web II</p>
+            </div>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/bootstrap.min.js"></script>
     @RenderSection("scripts", required: false)
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.nav li a').on('click', function () {
-                $(this).parent().parent().find('.active').removeClass('active');
-                $(this).parent().addClass('active').css('font-weight', 'bold');
-            });
-        });
-    </script>
+
   </body>
 </html>

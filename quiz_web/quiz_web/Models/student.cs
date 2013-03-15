@@ -52,6 +52,12 @@ namespace quiz_web.Models
             return new JavaScriptSerializer().Deserialize<student>(
             new Enlace().EjecutarAccion(url +"/"+student.ID.ToString()+ data, "PUT", student));
         }
+
+        public student delete(student student)
+        {
+            return new JavaScriptSerializer().Deserialize<student>(
+            new Enlace().EjecutarAccion(url + "/" + student.ID.ToString() + data, "DELETE", student));
+        }
         //public DbSet<student> students { get; set; }
     }
 }

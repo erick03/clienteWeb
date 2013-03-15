@@ -70,16 +70,11 @@ namespace quiz_web.Controllers
         public ActionResult Edit(int id = 0)
         {
             student student = new student();
-            using (var client = new WebClient())
+            student = db.find(id);
+            //student student = db.students.Find(id);
+            if (student == null)
             {
-                //student = db.students.Find(id);
-                var json = client.DownloadString(url + "students/"+id.ToString()+".json");
-                var serializer = new JavaScriptSerializer();
-                student = serializer.Deserialize<student>(json);
-                if (student == null)
-                {
-                    return HttpNotFound();
-                }
+                return HttpNotFound();
             }
             return View(student);
         }
@@ -90,12 +85,7 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Edit(student student)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(student).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            db.edit(student);
             return View(student);
         }
 
@@ -105,27 +95,13 @@ namespace quiz_web.Controllers
         public ActionResult Delete(int id = 0)
         {
             student student = new student();
-            using (var client = new WebClient())
+            student = db.find(id);
+            //student student = db.students.Find(id);
+            if (student == null)
             {
-                //student = db.students.Find(id);
-                var json = client.DownloadString(url + "students/" + id.ToString() + ".json");
-                var serializer = new JavaScriptSerializer();
-                student = serializer.Deserialize<student>(json);
-                if (student == null)
-                {
-                    return HttpNotFound();
-                }
+                return HttpNotFound();
             }
             return View(student);
-        }
-        //Borrar para rails
-        public ActionResult DeleteConfirmedR(int id)
-        {
-            WebRequest request = WebRequest.Create(url + "students/" + id.ToString() + ".json");
-            request.Method = "DELETE";
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            return RedirectToAction("Index");
         }
         //
         // POST: /student/Delete/5
@@ -133,9 +109,14 @@ namespace quiz_web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            /*student student = db.students.Find(id);
-            db.students.Remove(student);
-            db.SaveChanges();*/
+            student student = new student();
+            student = db.find(id);
+            //student student = db.students.Find(id);
+            if (student == null)
+            {
+                return HttpNotFound();
+            }
+            db.delete(student);
             return RedirectToAction("Index");
         }
 
