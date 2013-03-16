@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -15,9 +16,8 @@ namespace quiz_web.Models
         public string identification { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }
+        [DataType(DataType.Password)]
         public string password { get; set; }
-        /*public string created_at { get; set; }
-        public string updated_at { get; set; }*/
     }
 
     public class studentsDBContext : DbContext

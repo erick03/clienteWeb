@@ -20,15 +20,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Index()
         {
-            List<professors> result;
-            using (var client = new WebClient())
-            {
-                var json = client.DownloadString(url + "professors.json");
-                var serializer = new JavaScriptSerializer();
-                result = serializer.Deserialize<List<professors>>(json);
-            }
-            return View(result);
-            //return View(db.professor.ToList());
+            return View(db.info());
         }
 
         //
@@ -37,24 +29,12 @@ namespace quiz_web.Controllers
         public ActionResult Details(int id = 0)
         {
             professors professor = new professors();
-            using (var client = new WebClient())
-            {
-                var json = client.DownloadString(url + "professors/" + id.ToString() + ".json");
-                var serializer = new JavaScriptSerializer();
-                professor = serializer.Deserialize<professors>(json);
-            }
-            //student student = db.students.Find(id);
+            professor = db.find(id);
             if (professor == null)
             {
                 return HttpNotFound();
             }
             return View(professor);
-            /*professors professors = db.professor.Find(id);
-            if (professors == null)
-            {
-                return HttpNotFound();
-            }
-            return View(professors);*/
         }
 
         //
@@ -73,7 +53,7 @@ namespace quiz_web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.professor.Add(professors);
+                db.create(professors);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -87,25 +67,8 @@ namespace quiz_web.Controllers
         public ActionResult Edit(int id = 0)
         {
             professors professors = new professors();
-            using (var client = new WebClient())
-            {
-                //student = db.students.Find(id);
-                var json = client.DownloadString(url + "professors/" + id.ToString() + ".json");
-                var serializer = new JavaScriptSerializer();
-                professors = serializer.Deserialize<professors>(json);
-                if (professors == null)
-                {
-                    return HttpNotFound();
-                }
-            }
+            professors = db.find(id);
             return View(professors);
-            /*
-            professors professors = db.professor.Find(id);
-            if (professors == null)
-            {
-                return HttpNotFound();
-            }
-            return View(professors);*/
         }
 
         //
@@ -114,12 +77,7 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Edit(professors professors)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(professors).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            db.edit(professors);
             return View(professors);
         }
 
@@ -129,25 +87,8 @@ namespace quiz_web.Controllers
         public ActionResult Delete(int id = 0)
         {
             professors professor = new professors();
-            using (var client = new WebClient())
-            {
-                //student = db.students.Find(id);
-                var json = client.DownloadString(url + "professors/" + id.ToString() + ".json");
-                var serializer = new JavaScriptSerializer();
-                professor = serializer.Deserialize<professors>(json);
-                if (professor == null)
-                {
-                    return HttpNotFound();
-                }
-            }
+            professor = db.find(id);
             return View(professor);
-            /*
-            professors professors = db.professor.Find(id);
-            if (professors == null)
-            {
-                return HttpNotFound();
-            }
-            return View(professors);*/
         }
 
         //
@@ -156,8 +97,8 @@ namespace quiz_web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            professors professors = db.professor.Find(id);
-            db.professor.Remove(professors);
+            professors professors = db.find(id);
+            db.delete(professors);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
