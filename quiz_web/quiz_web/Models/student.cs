@@ -16,6 +16,9 @@ namespace quiz_web.Models
         public string identification { get; set; }
         public string name { get; set; }
         public string lastname { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "El número de caracteres de {0} debe ser al menos {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         public string password { get; set; }
     }
