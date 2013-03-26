@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Courses</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create",null,new { @class = "btn btn-success btn-mini" })
 </p>
-<table>
+<table class ="table table-striped table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.code)
@@ -36,9 +36,8 @@
             @Html.DisplayFor(modelItem => item.descripction)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID },new { @class = "btn btn-primary btn-mini" }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID },new { @class = "btn btn-danger btn-mini" })
         </td>
     </tr>
 }

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace quiz_web.Models
 {
@@ -17,6 +18,41 @@ namespace quiz_web.Models
 
     public class CourseDBcontext : DbContext
     {
-        public DbSet<Course> Course { get; set; } 
+        //public DbSet<Course> Course { get; set; }
+        private string url = "http://localhost:3000/courses";
+        string data = ".json";
+        public List<Course> info()
+        {
+            var json = new Enlace().EjecutarAccion(url + ".json", "GET");
+            var serializer = new JavaScriptSerializer();
+            List<Course> result = serializer.Deserialize<List<Course>>(json);
+            return result;
+        }
+
+        public Course find(int id)
+        {
+            var json = new Enlace().EjecutarAccion(url + "/" + id.ToString() + ".json", "GET");
+            var serializer = new JavaScriptSerializer();
+            Course result = serializer.Deserialize<Course>(json);
+            return result;
+        }
+        //
+        public Course create(Course courses)
+        {
+            return new JavaScriptSerializer().Deserialize<Course>(
+            new Enlace().EjecutarAccion(url + ".json", "POST", courses));
+        }
+
+        public Course edit(Course course)
+        {
+            return new JavaScriptSerializer().Deserialize<Course>(
+            new Enlace().EjecutarAccion(url + "/" + course.ID.ToString() + data, "PUT", course));
+        }
+
+        public Course delete(Course course)
+        {
+            return new JavaScriptSerializer().Deserialize<Course>(
+            new Enlace().EjecutarAccion(url + "/" + course.ID.ToString() + data, "DELETE", course));
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Course.ToList());
+            return View(db.info());
         }
 
         //
@@ -26,7 +26,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Course course = db.Course.Find(id);
+            Course course = db.find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -39,6 +39,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -50,7 +51,7 @@ namespace quiz_web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Course.Add(course);
+                db.create(course);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -63,7 +64,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Course course = db.Course.Find(id);
+            Course course = db.find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -77,12 +78,13 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Edit(Course course)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)
             {
                 db.Entry(course).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            }*/
+            db.edit(course);
             return View(course);
         }
 
@@ -91,7 +93,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Course course = db.Course.Find(id);
+            Course course = db.find(id);
             if (course == null)
             {
                 return HttpNotFound();
@@ -105,8 +107,8 @@ namespace quiz_web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Course course = db.Course.Find(id);
-            db.Course.Remove(course);
+            Course course = db.find(id);
+            db.delete(course);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

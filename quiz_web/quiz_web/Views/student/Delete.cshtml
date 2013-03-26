@@ -56,7 +56,7 @@
 @using (Html.BeginForm()) {
 <p id="puto">
 @Html.HiddenFor(model => model.ID)
-<input type="submit" value="Delete" id="delete_student"/> |
+<input  class="btn btn-danger" type="submit" value="Delete" id="delete_student"/> |
 @Html.ActionLink("Back to List", "Index")
 </p>
 }

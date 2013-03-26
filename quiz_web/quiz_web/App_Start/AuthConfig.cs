@@ -19,7 +19,7 @@ namespace quiz_web
             //    clientSecret: "");
 
             //OAuthWebSecurity.RegisterTwitterClient(
-            //    consumerKey: "",
+            //  consumerKey: "",
             //    consumerSecret: "");
 
             //OAuthWebSecurity.RegisterFacebookClient(
