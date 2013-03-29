@@ -3,7 +3,7 @@
   <head>
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/themes/base/css", "~/Content/css")
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/bootstrap.css" rel="stylesheet">
   </head>
   <body>
     <div class="navbar navbar-inverse">
@@ -25,13 +25,6 @@
         </div>
       </div>
     </div>
-    <footer>
-      <div class="content-wrapper">
-        <div class="float-left">
-          <p>&copy; @DateTime.Now.Year - Programacion en ambiente web II</p>
-        </div>
-      </div>
-    </footer>
     @Scripts.Render("~/bundles/jquery")
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/bootstrap.min.js"></script>

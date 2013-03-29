@@ -8,7 +8,6 @@
     <h1>@ViewBag.Title.</h1>
 </hgroup>
 
-<section id="loginForm">
 <h2>Utilice una cuenta local para iniciar sesión.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
@@ -38,7 +37,6 @@
         @Html.ActionLink("Register", "Register") si no tiene ninguna cuenta.
     </p>
 }
-</section>
 
 
 @section Scripts {
