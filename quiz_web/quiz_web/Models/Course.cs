@@ -15,6 +15,10 @@ namespace quiz_web.Models
         public string name { get; set; }
         public string descripction { get; set; }
     }
+    public class log
+    {
+        public bool value { get; set; }
+    }
     public class CourseDBcontext : DbContext
     {
         //public DbSet<Course> Course { get; set; }
@@ -29,13 +33,14 @@ namespace quiz_web.Models
         }
         public bool Login(LoginModel model, bool persistCookie = false)
         {
-            string url2 = "http://localhost:3000/courses/loggin";
+            string url2 = "http://localhost:3000/courses/login";
             bool result = false;
+            string ver = model.UserName.ToString();
             var json = new Enlace().EjecutarAccion(url2 +".json", "GET");
             var serializer = new JavaScriptSerializer();
-            string estado = json.ToString().Substring(19,23);
-            LoginModel result2 = serializer.Deserialize<LoginModel>(json);
-            if (result2.Password == "true")
+            //string estado = json.ToString().Substring(19,23);
+            log result2 = serializer.Deserialize<log>(json);
+            if (result2.value)
             {
                 result = true;
             }
