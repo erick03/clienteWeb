@@ -17,6 +17,7 @@ namespace quiz_web.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private CourseDBcontext db = new CourseDBcontext();
         //
         // GET: /Account/Login
 
@@ -35,7 +36,7 @@ namespace quiz_web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && db.Login(model, persistCookie: model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }

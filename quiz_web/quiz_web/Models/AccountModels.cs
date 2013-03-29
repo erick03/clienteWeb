@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 
 namespace quiz_web.Models
@@ -69,7 +70,7 @@ namespace quiz_web.Models
         [Display(Name = "¿Recordar cuenta?")]
         public bool RememberMe { get; set; }
     }
-
+    
     public class RegisterModel
     {
         [Required]

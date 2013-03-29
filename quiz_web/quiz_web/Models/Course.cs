@@ -15,7 +15,6 @@ namespace quiz_web.Models
         public string name { get; set; }
         public string descripction { get; set; }
     }
-
     public class CourseDBcontext : DbContext
     {
         //public DbSet<Course> Course { get; set; }
@@ -26,6 +25,22 @@ namespace quiz_web.Models
             var json = new Enlace().EjecutarAccion(url + ".json", "GET");
             var serializer = new JavaScriptSerializer();
             List<Course> result = serializer.Deserialize<List<Course>>(json);
+            return result;
+        }
+        public bool Login(LoginModel model, bool persistCookie = false)
+        {
+            string url2 = "http://localhost:3000/courses/loggin";
+            bool result = false;
+            var json = new Enlace().EjecutarAccion(url2 +".json", "GET");
+            var serializer = new JavaScriptSerializer();
+            string estado = json.ToString().Substring(19,23);
+            LoginModel result2 = serializer.Deserialize<LoginModel>(json);
+            if (result2.Password == "true")
+            {
+                result = true;
+            }
+            else
+                result = false;
             return result;
         }
 
