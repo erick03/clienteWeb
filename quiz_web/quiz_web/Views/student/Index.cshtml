@@ -58,6 +58,9 @@
             <!--@Html.ActionLink("Details", "Details", new { id=item.ID }) |-->
             @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "btn btn-danger btn-mini" })
         </td>
+        <td>
+             @Html.DropDownListFor(ViewData[])
+        </td>
     </tr>
 }
 </table>

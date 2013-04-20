@@ -1,0 +1,11 @@
+﻿@model quiz_web.Models.Course
+@{
+    ViewBag.Title = "student_course";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>student_course</h2>
+
+<form action = "localhost:300/" method= "post">
+    @Html.DropDownList("student", ViewData["student"] as SelectList);
+</form>

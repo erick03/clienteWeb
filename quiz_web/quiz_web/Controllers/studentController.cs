@@ -47,7 +47,7 @@ namespace quiz_web.Controllers
         {
             return View();
         }
-
+        
         //
         // POST: /student/Create
 

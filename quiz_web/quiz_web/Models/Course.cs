@@ -13,7 +13,7 @@ namespace quiz_web.Models
         public int ID { get; set; }
         public string code { get; set; }
         public string name { get; set; }
-        public string descripction { get; set; }
+        public string description { get; set; }
     }
     public class log
     {
@@ -36,9 +36,9 @@ namespace quiz_web.Models
             string url2 = "http://localhost:3000/courses/login";
             bool result = false;
             string ver = model.UserName.ToString();
-            var json = new Enlace().EjecutarAccion(url2 +".json", "GET");
+            var json = new Enlace().EjecutarAccion(url2 + "username=" + model.UserName.ToString() + "&password="
+                                                    + model.Password.ToString(), "GET");
             var serializer = new JavaScriptSerializer();
-            //string estado = json.ToString().Substring(19,23);
             log result2 = serializer.Deserialize<log>(json);
             if (result2.value)
             {
