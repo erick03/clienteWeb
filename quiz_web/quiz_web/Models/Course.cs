@@ -31,6 +31,32 @@ namespace quiz_web.Models
             List<Course> result = serializer.Deserialize<List<Course>>(json);
             return result;
         }
+        #region Metodos de los datos de cursos professor asociado y students asociados a el curso
+        public List<student> studentAsociado(int id)
+        {
+            var json = new Enlace().EjecutarAccion(url + "/get_students.json?id=" + id.ToString(), "GET");
+            var serializer = new JavaScriptSerializer();
+            List<student> result = serializer.Deserialize<List<student>>(json);
+            return result;
+        }
+
+        public List<Course> detailCourse(int id)
+        {
+            var json = new Enlace().EjecutarAccion(url + "/" + id.ToString() + ".json", "GET");
+            var serializer = new JavaScriptSerializer();
+            List<Course> result = serializer.Deserialize<List<Course>>(json);
+            return result;
+        }
+
+        public List<professors> professorCourse(int id)
+        {
+            var json = new Enlace().EjecutarAccion(url + "/get_professors.json?id=" + id.ToString(), "GET");
+            var serializer = new JavaScriptSerializer();
+            List<professors> result = serializer.Deserialize<List<professors>>(json);
+            return result;
+        }
+        #endregion
+
         public bool Login(LoginModel model, bool persistCookie = false)
         {
             string url2 = "http://localhost:3000/courses/login";

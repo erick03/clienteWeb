@@ -12,7 +12,7 @@ namespace quiz_web.Controllers
     public class CourseController : Controller
     {
         private CourseDBcontext db = new CourseDBcontext();
-
+        private studentsDBContext dbStudent = new studentsDBContext();
         //
         // GET: /Course/
 
@@ -101,11 +101,6 @@ namespace quiz_web.Controllers
             return View(course);
         }
 
-        [ActionName("Asociaciones")]
-        public ActionResult asociaciones()
-        {
-            return View();
-        }
         //
         // POST: /Course/Delete/5
 
@@ -122,6 +117,33 @@ namespace quiz_web.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+
+        [ActionName("Asociaciones")]
+        public ActionResult asociaciones(int id = 0)
+        {
+            List<student> studentCourse = db.studentAsociado(id);
+            if (studentCourse == null)
+            {
+                return HttpNotFound();
+            }
+            List<professors> professorCourse = db.professorCourse(id);
+            if (professorCourse == null)
+            {
+                return HttpNotFound();
+            }
+            List<Course> course = db.detailCourse(id);
+            //Datos asociados a el curso
+            ViewBag.professorsCourse = professorCourse;
+            ViewBag.studentsCourse = studentCourse;
+            ViewBag.infoCourse = course;
+
+            //Datos no asociados a el curso
+            ViewBag.notStudentCourse = null;
+            ViewBag.notProfessors = null;
+            
+            return View();
         }
 
         /*[ActionName("asignarestudiante")]

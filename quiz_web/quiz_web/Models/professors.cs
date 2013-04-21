@@ -23,7 +23,7 @@ namespace quiz_web.Models
     public class professorsDBContext : DbContext
     {
         //public DbSet<professors> professor { get; set; } 
-        private string url = "http://localhost:3000/students";
+        private string url = "http://localhost:3000/professors";
         string data = ".json";
         public List<professors> info()
         {
