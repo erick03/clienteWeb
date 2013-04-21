@@ -101,6 +101,11 @@ namespace quiz_web.Controllers
             return View(course);
         }
 
+        [HttpPost, ActionName("asociaciones")]
+        public ActionResult Add()
+        {
+            return RedirectToAction("asociaciones");
+        }
         //
         // POST: /Course/Delete/5
 
