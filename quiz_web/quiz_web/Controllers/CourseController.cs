@@ -119,7 +119,7 @@ namespace quiz_web.Controllers
             base.Dispose(disposing);
         }
 
-
+        #region DATOS DE LOS COURSES CON SUS ALUMNOS Y PROFESSOR
         [ActionName("Asociaciones")]
         public ActionResult asociaciones(int id = 0)
         {
@@ -134,18 +134,30 @@ namespace quiz_web.Controllers
                 return HttpNotFound();
             }
             List<Course> course = db.detailCourse(id);
+
+            List<student> notInCourseStudentCourse = db.notStudentAsociado(id);
             //Datos asociados a el curso
             ViewBag.professorsCourse = professorCourse;
             ViewBag.studentsCourse = studentCourse;
             ViewBag.infoCourse = course;
 
             //Datos no asociados a el curso
-            ViewBag.notStudentCourse = null;
+            ViewBag.notStudentCourse = notInCourseStudentCourse;
             ViewBag.notProfessors = null;
             
             return View();
         }
 
+        [ActionName("DeleteStudentCourse")]
+        public ActionResult DeleteStudentCourse(int id)
+        {
+            student student = dbStudent.find(id);
+            db.DeleteStudentCourse(student);
+            db.SaveChanges();
+            return RedirectToAction("Asociaciones");
+        }
+        #endregion
+        
         /*[ActionName("asignarestudiante")]
         public ActionResult Assign(int id = 0)
         {

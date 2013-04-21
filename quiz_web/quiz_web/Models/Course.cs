@@ -31,10 +31,20 @@ namespace quiz_web.Models
             List<Course> result = serializer.Deserialize<List<Course>>(json);
             return result;
         }
+
         #region Metodos de los datos de cursos professor asociado y students asociados a el curso
         public List<student> studentAsociado(int id)
         {
             var json = new Enlace().EjecutarAccion(url + "/get_students.json?id=" + id.ToString(), "GET");
+            var serializer = new JavaScriptSerializer();
+            List<student> result = serializer.Deserialize<List<student>>(json);
+            return result;
+        }
+
+        public List<student> notStudentAsociado(int id)
+        {
+            //http://localhost:3000/courses/1
+            var json = new Enlace().EjecutarAccion(url + "/get_students_inverse.json?id=" + id.ToString(), "GET");
             var serializer = new JavaScriptSerializer();
             List<student> result = serializer.Deserialize<List<student>>(json);
             return result;
@@ -54,6 +64,12 @@ namespace quiz_web.Models
             var serializer = new JavaScriptSerializer();
             List<professors> result = serializer.Deserialize<List<professors>>(json);
             return result;
+        }
+
+        public Course DeleteStudentCourse(student student)
+        {
+            return new JavaScriptSerializer().Deserialize<Course>(
+            new Enlace().EjecutarAccion("http://localhost:3000/course_students/" + student.ID.ToString() + ".json", "DELETE",student));
         }
         #endregion
 
