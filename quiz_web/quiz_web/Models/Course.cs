@@ -43,18 +43,17 @@ namespace quiz_web.Models
 
         public List<student> notStudentAsociado(int id)
         {
-            //http://localhost:3000/courses/1
             var json = new Enlace().EjecutarAccion(url + "/get_students_inverse.json?id=" + id.ToString(), "GET");
             var serializer = new JavaScriptSerializer();
             List<student> result = serializer.Deserialize<List<student>>(json);
             return result;
         }
 
-        public List<Course> detailCourse(int id)
+        public Course detailCourse(int id)
         {
             var json = new Enlace().EjecutarAccion(url + "/" + id.ToString() + ".json", "GET");
             var serializer = new JavaScriptSerializer();
-            List<Course> result = serializer.Deserialize<List<Course>>(json);
+            Course result = serializer.Deserialize<Course>(json);
             return result;
         }
 

@@ -6,10 +6,7 @@
 
 <h2 class="text-center">Course information</h2>
 <br />
-@foreach (var cour in ViewBag.infoCourse)
-{
-    <strong class="text-warning">cour.name</strong>
-}
+    <strong class="text-warning">@ViewBag.infoCourse.name</strong>
 <br />
 @foreach (var item2 in ViewBag.professorsCourse)
 {
@@ -104,7 +101,7 @@
                 @itemNs.lastname
             </td>
             <td>
-            @Html.ActionLink("Add to course", "DeleteStudentCourse",new { id = itemNs.ID },new { @class = "btn btn-success btn-mini" })
+            @Html.ActionLink("Add to course", "DeleteStudentCourse",new { id = itemNs.ID, courseID = ViewBag.infoCourse.ID },new { @class = "btn btn-success btn-mini" })
             </td>
         </tr>
     }

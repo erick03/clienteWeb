@@ -78,12 +78,6 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Edit(Course course)
         {
-            /*if (ModelState.IsValid)
-            {
-                db.Entry(course).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }*/
             db.edit(course);
             return View(course);
         }
@@ -133,7 +127,7 @@ namespace quiz_web.Controllers
             {
                 return HttpNotFound();
             }
-            List<Course> course = db.detailCourse(id);
+            Course course = db.find(id);
 
             List<student> notInCourseStudentCourse = db.notStudentAsociado(id);
             //Datos asociados a el curso
