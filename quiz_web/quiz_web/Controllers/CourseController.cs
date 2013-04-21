@@ -101,10 +101,10 @@ namespace quiz_web.Controllers
             return View(course);
         }
 
-        [HttpPost, ActionName("asociaciones")]
-        public ActionResult Add()
+        [ActionName("Asociaciones")]
+        public ActionResult asociaciones()
         {
-            return RedirectToAction("asociaciones");
+            return View();
         }
         //
         // POST: /Course/Delete/5
@@ -123,5 +123,26 @@ namespace quiz_web.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        /*[ActionName("asignarestudiante")]
+        public ActionResult Assign(int id = 0)
+        {
+            Estudiante[] estudiantescurso = db.obtenerEstudiantes(id);
+            if (estudiantescurso == null)
+            {
+                return HttpNotFound();
+            }
+
+            Estudiante[] estudiantesnocurso = db.obtenerNoEstudiantes(id);
+
+            ViewBag.noestudiantes = estudiantesnocurso;
+            ViewBag.profesor = db.obtenerProfesor(id);
+            ViewBag.noprofesor = db.obtenerNoProfesores(id);
+
+            var curso = db.ObtenerDetalle(id);
+            ViewBag.curso = curso;
+
+            return View(estudiantescurso);
+        }*/
     }
 }
