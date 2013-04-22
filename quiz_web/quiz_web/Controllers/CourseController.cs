@@ -147,7 +147,7 @@ namespace quiz_web.Controllers
         {
             db.DeleteStudentCourse(idStudent, idCourse);
             //db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Asociaciones", new { id = idCourse });
         }
 
         [ActionName("AddStudentCourse")]
@@ -158,7 +158,7 @@ namespace quiz_web.Controllers
             a.student_id = idStudent;
             db.AddStudentCourse(a);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Asociaciones", new { id = idCourse});
         }
         #endregion
         
