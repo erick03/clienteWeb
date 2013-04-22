@@ -18,7 +18,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Index()
         {
-            return View(db.Test.ToList());
+            return View(db.info());
         }
 
         //
@@ -26,7 +26,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Test test = db.Test.Find(id);
+            Test test = db.find(id);
             if (test == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace quiz_web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Test.Add(test);
+                db.create(test);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -63,7 +63,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Test test = db.Test.Find(id);
+            Test test = db.find(id);
             if (test == null)
             {
                 return HttpNotFound();
@@ -77,12 +77,13 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Edit(Test test)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)
             {
                 db.Entry(test).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }
+            }*/
+            db.edit(test);
             return View(test);
         }
 
@@ -91,7 +92,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Test test = db.Test.Find(id);
+            Test test = db.find(id);
             if (test == null)
             {
                 return HttpNotFound();
@@ -105,8 +106,8 @@ namespace quiz_web.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Test test = db.Test.Find(id);
-            db.Test.Remove(test);
+            Test test = db.find(id);
+            db.delete(test);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
