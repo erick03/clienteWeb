@@ -143,18 +143,20 @@ namespace quiz_web.Controllers
         }
 
         [ActionName("DeleteStudentCourse")]
-        public ActionResult DeleteStudentCourse(int id, int idCourse)
+        public ActionResult DeleteStudentCourse(int idStudent, int idCourse)
         {
-            db.DeleteStudentCourse(id);
+            db.DeleteStudentCourse(idStudent, idCourse);
             db.SaveChanges();
-            return View();
-            //return RedirectToAction("Asociaciones");
+            return RedirectToAction("Index");
         }
 
         [ActionName("AddStudentCourse")]
         public ActionResult AddStudentCourse(int idStudent , int idCourse)
         {
-            db.AddStudentCourse( idCourse, idStudent);
+            datosAsocia a = new datosAsocia();
+            a.course_id = idCourse;
+            a.student_id = idStudent;
+            db.AddStudentCourse(a);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

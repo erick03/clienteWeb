@@ -58,7 +58,7 @@
                 @item.lastname
             </td>
             <td>
-            @Html.ActionLink("Delete", "DeleteStudentCourse",new { id = item.ID },new { @class = "btn btn-danger btn-mini" })
+            @Html.ActionLink("Delete", "DeleteStudentCourse",new { idStudent = item.ID, idCourse = ViewBag.infoCourse.ID },new { @class = "btn btn-success btn-mini" })
             </td>
         </tr>
     }

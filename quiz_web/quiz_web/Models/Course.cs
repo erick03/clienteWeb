@@ -65,15 +65,15 @@ namespace quiz_web.Models
             return result;
         }
 
-        public Course DeleteStudentCourse(int id)
+        public void DeleteStudentCourse(int idStudent, int idCourse)
         {
-            return new JavaScriptSerializer().Deserialize<Course>(
-            new Enlace().EjecutarAccion("http://localhost:3000/course_students/" + id + ".json", "DELETE"));
+            new Enlace().EjecutarAccion("http://localhost:3000/course_students/delete_row.json?course_id=" + idCourse + "&student_id=" + idStudent, "GET");
         }
 
-        public void AddStudentCourse(int idCourse, int idstudent)
+        public void AddStudentCourse(datosAsocia a)
         {
-            var json = new Enlace().EjecutarAccion("http://localhost:3000/course_students.json?course_id="+idCourse+"&student_id="+idstudent, "GET");
+            new Enlace().EjecutarAccion("http://localhost:3000/course_students.json", "POST", a);
+            //var json = new Enlace().EjecutarAccion("http://localhost:3000/course_students.json?course_id="+idCourse+"&student_id="+idstudent, "POST");
             //return new JavaScriptSerializer().Deserialize<List<Course>>(json);
         }
         #endregion

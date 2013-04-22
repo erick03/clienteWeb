@@ -7,7 +7,7 @@ namespace quiz_web.Models
 {
     public class datosAsocia
     {
-        public int codCursp { get; set; }
-        public int codStudent { get; set; }
+        public int course_id { get; set; }
+        public int student_id { get; set; }
     }
 }
