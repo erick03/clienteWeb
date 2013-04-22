@@ -101,8 +101,8 @@
                 @itemNs.lastname
             </td>
             <td>
-            @Html.ActionLink("Add to course", "DeleteStudentCourse",new { id = itemNs.ID, courseID = ViewBag.infoCourse.ID },new { @class = "btn btn-success btn-mini" })
+            @Html.ActionLink("Add to course", "AddStudentCourse",new { idStudent = itemNs.ID, idCourse = ViewBag.infoCourse.ID },new { @class = "btn btn-success btn-mini" })
             </td>
         </tr>
-    }
+   }
 </table>

@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\datosAsocia.cs" />
     <Compile Include="Models\DbContex.cs" />
     <Compile Include="Models\Enlace.cs" />
     <Compile Include="Models\professors.cs" />
