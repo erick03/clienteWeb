@@ -38,6 +38,9 @@
         <th>
             LastName
         </th>
+        <th>
+            Actions
+        </th>
     </tr>
     @foreach (var item in ViewBag.studentsCourse)
     {
@@ -58,7 +61,7 @@
                 @item.lastname
             </td>
             <td>
-            @Html.ActionLink("Delete", "DeleteStudentCourse",new { idStudent = item.ID, idCourse = ViewBag.infoCourse.ID },new { @class = "btn btn-success btn-mini" })
+            @Html.ActionLink("Delete", "DeleteStudentCourse",new { idStudent = item.ID, idCourse = ViewBag.infoCourse.ID },new { @class = "btn btn-danger btn-mini" })
             </td>
         </tr>
     }
@@ -80,6 +83,9 @@
         </th>
         <th>
             LastName
+        </th>
+        <th>
+            Actions
         </th>
     </tr>
     @foreach (var itemNs in ViewBag.notStudentCourse)

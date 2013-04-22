@@ -146,7 +146,7 @@ namespace quiz_web.Controllers
         public ActionResult DeleteStudentCourse(int idStudent, int idCourse)
         {
             db.DeleteStudentCourse(idStudent, idCourse);
-            db.SaveChanges();
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 
