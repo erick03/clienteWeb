@@ -21,6 +21,7 @@
         <th>
             @Html.DisplayNameFor(model => model.description)
         </th>
+        <th>Quiz</th>
     </tr>
 
 @foreach (var item in ViewBag.studentsCourse)
@@ -35,6 +36,7 @@
         <td>
             @item.description
         </td>
+        <td>@Html.ActionLink("Quiz", "Quiz",null,new { @class = "btn btn-primary btn-mini" })</td>
     </tr>
 }
 </table>
