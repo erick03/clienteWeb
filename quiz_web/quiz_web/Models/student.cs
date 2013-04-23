@@ -28,7 +28,13 @@ namespace quiz_web.Models
         private string url = "http://localhost:3000/students";
         //public student student = new student();
         private string data = ".json";
-
+        public List<Course> get_courses(int id)
+        {
+            var json = new Enlace().EjecutarAccion("http://localhost:3000/courses/get_courses_student.json?id=" + id, "GET");
+            var serializer = new JavaScriptSerializer();
+            List<Course> result = serializer.Deserialize<List<Course>>(json);
+            return result;
+        }
         public List<student> info()
         {
             var json = new Enlace().EjecutarAccion(url+".json", "GET");
@@ -61,12 +67,12 @@ namespace quiz_web.Models
             return new JavaScriptSerializer().Deserialize<student>(
             new Enlace().EjecutarAccion(url + "/" + student.ID.ToString() + data, "DELETE", student));
         }
-
+        /*
         public course get_questions(int id)
         {
             return new JavaScriptSerializer().Deserialize<course>(
             new Enlace().EjecutarAccion(url + "/tests/get_questions.json?test=" + id, "GET"));
-        }
+        }*/
         //public DbSet<student> students { get; set; }
     }
 }

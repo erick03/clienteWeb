@@ -23,28 +23,16 @@ namespace quiz_web.Controllers
         // GET: /student/
         public ActionResult Index()
         {
-            return View(db.info());
+            return View(dbStudent.info());
             //return View(db.students.ToList());
         }
 
-        [ActionName("studentCourses")]
-        public ActionResult studentCourses(int id = 0)
+        [ActionName("studentCourse")]
+        public ActionResult studentCourse(int id = 1)
         {
-            Course course = db.find(id);
-            if (course == null)
-            {
-                return HttpNotFound();
-            }
-            List<course> notInCourseStudentCourse = db.notStudentAsociado(id);
+            List<Course> student_courses = dbStudent.get_courses(id);
             //Datos asociados a el curso
-            ViewBag.professorsCourse = professorCourse;
-            ViewBag.studentsCourse = studentCourse;
-            ViewBag.infoCourse = course;
-
-            //Datos no asociados a el curso
-            ViewBag.notStudentCourse = notInCourseStudentCourse;
-            ViewBag.notProfessors = null;
-
+            ViewBag.studentsCourse = student_courses;
             return View();
         }
         //
@@ -53,7 +41,7 @@ namespace quiz_web.Controllers
         public ActionResult Details(int id = 0)
         {
             student student = new student();
-            student = db.find(id);
+            student = dbStudent.find(id);
             //student student = db.students.Find(id);
             if (student == null)
             {
@@ -78,7 +66,7 @@ namespace quiz_web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.create(student);
+                dbStudent.create(student);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -92,7 +80,7 @@ namespace quiz_web.Controllers
         public ActionResult Edit(int id = 0)
         {
             student student = new student();
-            student = db.find(id);
+            student = dbStudent.find(id);
             //student student = db.students.Find(id);
             if (student == null)
             {
@@ -107,7 +95,7 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Edit(student student)
         {
-            db.edit(student);
+            dbStudent.edit(student);
             return View(student);
         }
 
@@ -117,7 +105,7 @@ namespace quiz_web.Controllers
         public ActionResult Delete(int id = 0)
         {
             student student = new student();
-            student = db.find(id);
+            student = dbStudent.find(id);
             //student student = db.students.Find(id);
             if (student == null)
             {
@@ -132,19 +120,19 @@ namespace quiz_web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             student student = new student();
-            student = db.find(id);
+            student = dbStudent.find(id);
             //student student = db.students.Find(id);
             if (student == null)
             {
                 return HttpNotFound();
             }
-            db.delete(student);
+            dbStudent.delete(student);
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            db.Dispose();
+            dbStudent.Dispose();
             base.Dispose(disposing);
         }
     }
