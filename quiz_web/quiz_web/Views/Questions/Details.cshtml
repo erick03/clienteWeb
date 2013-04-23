@@ -1,0 +1,30 @@
+﻿@model quiz_web.Models.Questions
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Questions</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.question)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.question)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.test_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.test_id)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
