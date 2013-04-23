@@ -16,7 +16,8 @@ namespace quiz_web.Controllers
 {
     public class studentController : Controller
     {
-        private studentsDBContext db = new studentsDBContext();
+        private CourseDBcontext db = new CourseDBcontext();
+        private studentsDBContext dbStudent = new studentsDBContext();
         private string url = "http://localhost:3000/";
         //
         // GET: /student/
@@ -24,6 +25,27 @@ namespace quiz_web.Controllers
         {
             return View(db.info());
             //return View(db.students.ToList());
+        }
+
+        [ActionName("studentCourses")]
+        public ActionResult studentCourses(int id = 0)
+        {
+            Course course = db.find(id);
+            if (course == null)
+            {
+                return HttpNotFound();
+            }
+            List<course> notInCourseStudentCourse = db.notStudentAsociado(id);
+            //Datos asociados a el curso
+            ViewBag.professorsCourse = professorCourse;
+            ViewBag.studentsCourse = studentCourse;
+            ViewBag.infoCourse = course;
+
+            //Datos no asociados a el curso
+            ViewBag.notStudentCourse = notInCourseStudentCourse;
+            ViewBag.notProfessors = null;
+
+            return View();
         }
         //
         // GET: /student/Details/5
