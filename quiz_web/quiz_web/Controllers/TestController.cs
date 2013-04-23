@@ -16,9 +16,9 @@ namespace quiz_web.Controllers
         //
         // GET: /Test/
 
-        public ActionResult Index()
+        public ActionResult Index(int idCourse = 0)
         {
-            return View(db.info());
+            return View(db.info(idCourse));
         }
 
         //

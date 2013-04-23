@@ -1,0 +1,44 @@
+﻿@model quiz_web.Models.Questions
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<h2>Create</h2>
+model.test_id = @ViewBag.idTest;
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Questions</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.question)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.question)
+            @Html.ValidationMessageFor(model => model.question)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.test_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.test_id,null ,new { test_id = @ViewBag.idTest })
+            <!--@Html.ValidationMessageFor(model => model.test_id)-->
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", new { id = @ViewBag.idTest })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

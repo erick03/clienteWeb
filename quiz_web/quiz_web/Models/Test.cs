@@ -16,6 +16,7 @@ namespace quiz_web.Models
         public string date { get; set; }
         public bool status { get; set; }
         public string duration { get; set; }
+        public int course_id { get; set; }
     }
 
     public class TestDBcontext : DbContext
@@ -25,9 +26,9 @@ namespace quiz_web.Models
         //public student student = new student();
         private string data = ".json";
 
-        public List<Test> info()
+        public List<Test> info(int idCourse = 0)
         {
-            var json = new Enlace().EjecutarAccion(url + ".json", "GET");
+            var json = new Enlace().EjecutarAccion(url + "/get_test.json?id="+idCourse, "GET");
             var serializer = new JavaScriptSerializer();
             List<Test> result = serializer.Deserialize<List<Test>>(json);
             return result;
