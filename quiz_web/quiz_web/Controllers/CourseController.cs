@@ -130,6 +130,8 @@ namespace quiz_web.Controllers
             Course course = db.find(id);
 
             List<student> notInCourseStudentCourse = db.notStudentAsociado(id);
+
+            List<professors> notInCourseProfessorCourse = db.notProfessorInCourse(id);
             //Datos asociados a el curso
             ViewBag.professorsCourse = professorCourse;
             ViewBag.studentsCourse = studentCourse;
@@ -137,7 +139,7 @@ namespace quiz_web.Controllers
 
             //Datos no asociados a el curso
             ViewBag.notStudentCourse = notInCourseStudentCourse;
-            ViewBag.notProfessors = null;
+            ViewBag.notProfessors = notInCourseProfessorCourse;
             
             return View();
         }
@@ -160,27 +162,25 @@ namespace quiz_web.Controllers
             db.SaveChanges();
             return RedirectToAction("Asociaciones", new { id = idCourse});
         }
-        #endregion
-        
-        /*[ActionName("asignarestudiante")]
-        public ActionResult Assign(int id = 0)
+
+        [ActionName("AddProfessorCourse")]
+        public ActionResult AddProfessorCourse(int idProfessor, int idCourse)
         {
-            Estudiante[] estudiantescurso = db.obtenerEstudiantes(id);
-            if (estudiantescurso == null)
-            {
-                return HttpNotFound();
-            }
+            datosAsociaP p = new datosAsociaP();
+            p.course_id = idCourse;
+            p.professor_id = idProfessor;
+            db.AddProfessorCourse(p);
+            db.SaveChanges();
+            return RedirectToAction("Asociaciones", new { id = idCourse });
+        }
 
-            Estudiante[] estudiantesnocurso = db.obtenerNoEstudiantes(id);
-
-            ViewBag.noestudiantes = estudiantesnocurso;
-            ViewBag.profesor = db.obtenerProfesor(id);
-            ViewBag.noprofesor = db.obtenerNoProfesores(id);
-
-            var curso = db.ObtenerDetalle(id);
-            ViewBag.curso = curso;
-
-            return View(estudiantescurso);
-        }*/
+        [ActionName("DeleteProfessorCourse")]
+        public ActionResult DeleteProfessorCourse(int idProfessor, int idCourse)
+        {
+            db.DeleteProfessorCourse(idProfessor, idCourse);
+            //db.SaveChanges();
+            return RedirectToAction("Asociaciones", new { id = idCourse });
+        }
+        #endregion
     }
 }

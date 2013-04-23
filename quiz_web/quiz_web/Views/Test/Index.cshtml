@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<quiz_web.Models.Test>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Course's test";
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Course's test</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success btn-mini" })
+    @Html.ActionLink("Create New", "Create", new { idCourse = @ViewBag.Idcourse  }, new { @class = "btn btn-success btn-mini" })
 </p>
 <table class ="table table-striped table-bordered">
     <tr>
@@ -54,11 +54,11 @@
             @Html.DisplayFor(modelItem => item.duration)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID },new { @class = "btn btn-primary btn-mini"}) |
-            @Html.ActionLink("Questions","Index", "Questions", new { id=item.ID }, new { @class = "btn btn-primary btn-mini" })
+            @Html.ActionLink("Questions","Index", "Questions", new { id=item.ID , idCourse = item.course_id }, new { @class = "btn btn-primary btn-mini" })
             @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-danger btn-mini" })
         </td>
     </tr>
 }
 
 </table>
+@Html.ActionLink("Course", "Index", "Course",null, new { @class = "btn btn-info btn-mini" })

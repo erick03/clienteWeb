@@ -12,12 +12,13 @@ namespace quiz_web.Controllers
     public class TestController : Controller
     {
         private TestDBcontext db = new TestDBcontext();
-
+        int variable = 0;
         //
         // GET: /Test/
 
         public ActionResult Index(int idCourse = 0)
         {
+            ViewBag.Idcourse = idCourse;
             return View(db.info(idCourse));
         }
 
@@ -37,8 +38,11 @@ namespace quiz_web.Controllers
         //
         // GET: /Test/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int idCourse)
         {
+            ViewBag.Courseid = idCourse;
+            Test test = new Test();
+            test.course_id = idCourse;
             return View();
         }
 
@@ -48,14 +52,17 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Create(Test test)
         {
+            string ptt = "";
+            ptt = RouteData.Values["idCourse"] + Request.Url.Query;
+            ptt = ptt.Replace("?idCourse=", ""); //idCourse=1
+            test.course_id = int.Parse(ptt);
             if (ModelState.IsValid)
             {
                 db.create(test);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { idCourse = test.course_id });
             }
-
-            return View(test);
+            return RedirectToAction("Index", new { idCourse = test.course_id });
         }
 
         //
@@ -77,12 +84,6 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Edit(Test test)
         {
-            /*if (ModelState.IsValid)
-            {
-                db.Entry(test).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }*/
             db.edit(test);
             return View(test);
         }
@@ -109,7 +110,7 @@ namespace quiz_web.Controllers
             Test test = db.find(id);
             db.delete(test);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { idCourse = test.course_id });
         }
 
         protected override void Dispose(bool disposing)

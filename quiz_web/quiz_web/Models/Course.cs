@@ -65,9 +65,22 @@ namespace quiz_web.Models
             return result;
         }
 
+        public List<professors> notProfessorInCourse(int id)
+        {
+            var json = new Enlace().EjecutarAccion(url + "/get_professors_inverse.json?id=" + id.ToString(), "GET");
+            var serializer = new JavaScriptSerializer();
+            List<professors> result = serializer.Deserialize<List<professors>>(json);
+            return result;
+        }
+
         public void DeleteStudentCourse(int idStudent, int idCourse)
         {
             new Enlace().EjecutarAccion("http://localhost:3000/course_students/delete_row.json?course_id=" + idCourse + "&student_id=" + idStudent, "GET");
+        }
+
+        public void DeleteProfessorCourse(int idProfessor, int idCourse)
+        {
+            new Enlace().EjecutarAccion("http://localhost:3000/course_professor/delete_row.json?course_id=" + idCourse + "&professor_id=" + idProfessor, "GET");
         }
 
         public void AddStudentCourse(datosAsocia a)
@@ -76,11 +89,16 @@ namespace quiz_web.Models
             //var json = new Enlace().EjecutarAccion("http://localhost:3000/course_students.json?course_id="+idCourse+"&student_id="+idstudent, "POST");
             //return new JavaScriptSerializer().Deserialize<List<Course>>(json);
         }
+
+        public void AddProfessorCourse(datosAsociaP p)
+        {
+            new Enlace().EjecutarAccion("http://localhost:3000/course_professors.json", "POST", p);
+        }
         #endregion
 
         public bool Login(LoginModel model, bool persistCookie = false)
         {
-            string url2 = "http://localhost:3000/courses/login";
+            string url2 = "http://localhost:3000/courses/login.json?";
             bool result = false;
             string ver = model.UserName.ToString();
             var json = new Enlace().EjecutarAccion(url2 + "username=" + model.UserName.ToString() + "&password="

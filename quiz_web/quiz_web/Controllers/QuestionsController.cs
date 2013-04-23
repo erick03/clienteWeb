@@ -16,9 +16,10 @@ namespace quiz_web.Controllers
         //
         // GET: /Questions/
 
-        public ActionResult Index(int id = 0)
+        public ActionResult Index(int id = 0 , int idCourse = 0)
         {
             ViewBag.testID = id;
+            ViewBag.courseId = idCourse;
             return View(db.questionsTest(id));
         }
 
@@ -63,6 +64,10 @@ namespace quiz_web.Controllers
         [HttpPost]
         public ActionResult Create(Questions questions)
         {
+            string ptt = "";
+            ptt = RouteData.Values["testid"] + Request.Url.Query;
+            ptt = ptt.Replace("?testid=", ""); //idCourse=1
+            questions.test_id = int.Parse(ptt);
             if (ModelState.IsValid)
             {
                 db.create(questions);
@@ -106,7 +111,7 @@ namespace quiz_web.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Questions questions = db.Test.Find(id);
+            Questions questions = db.find(id);
             if (questions == null)
             {
                 return HttpNotFound();
@@ -124,6 +129,15 @@ namespace quiz_web.Controllers
             db.delete(questions);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [ActionName("DeleteQuestionTest")]
+        public ActionResult DeleteQuestionTest(int id)
+        {
+            Questions questions = db.find(id);
+            db.delete(questions);
+            //db.SaveChanges();
+            return RedirectToAction("Index", new { id = questions.test_id });
         }
 
         protected override void Dispose(bool disposing)
