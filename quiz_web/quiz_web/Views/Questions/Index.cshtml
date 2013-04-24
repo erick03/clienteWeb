@@ -13,7 +13,7 @@
 <table class ="table table-striped table-bordered">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.question)
+            @Html.DisplayNameFor(model => model.coso)
         </th>
         <th>
             Actions
@@ -23,7 +23,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.question)
+            @Html.DisplayFor(modelItem => item.coso)
         </td>
         <td>
             @Html.ActionLink("Delete", "DeleteQuestionTest", new { id=item.ID },new { @class = "btn btn-danger btn-mini" })

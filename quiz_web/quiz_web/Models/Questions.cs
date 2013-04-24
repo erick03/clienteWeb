@@ -10,7 +10,7 @@ namespace quiz_web.Models
     public class Questions
     {
         public int ID { get; set; }
-        public string question { get; set; }
+        public string coso { get; set; }
         public int test_id { get; set; }
     }
 
