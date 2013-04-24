@@ -130,7 +130,7 @@ namespace quiz_web.Controllers
             ViewBag.testID = id;
             //ViewBag.courseId = idCourse;
             ViewBag.Questions = dbQuestion.questionsTest(id);
-            ViewBag.Answers = dbQuestion.answersTest(id);
+            ViewBag.Answers = dbQuestion.answersTest(id, 0);
             return View();
         }
 
@@ -139,6 +139,16 @@ namespace quiz_web.Controllers
         {
             ViewBag.testID = id;
             ViewBag.Student = dbQuestion.StudentsThatAnswer(id);
+            return View();
+        }
+
+        [ActionName("AnswersNew")]
+        public ActionResult AnswersNew(Answer answer,int idTest = 0)
+        {
+            ViewBag.testID = idTest;
+            db.AnswersNew(answer);
+            //ViewBag.courseId = idCourse;
+            //ViewBag.Questions = dbQuestion.questionsTest(id);
             return View();
         }
 
