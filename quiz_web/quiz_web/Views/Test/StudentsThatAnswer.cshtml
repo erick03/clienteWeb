@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "StudentsThatAnswer";
+}
+
+<h2>StudentsThatAnswer</h2>
+<table class ="table table-striped table-bordered">
+    <tr>
+        <th>
+            Username
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Identification
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Lastname
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in ViewBag.Student)
+    {
+        <tr>
+            <td>
+                @item.username
+            </td>
+            <td>
+                @item.email
+            </td>
+            <td>
+                @item.identification
+            </td>
+            <td>
+                @item.name
+            </td>
+            <td>
+                @item.lastname
+            </td>
+            <td>
+                @Html.ActionLink("Qualify", "questionAnswers","ResultController", new { id=item.ID,  test_id = @ViewBag.test_id }, new { @class = "btn btn-primary btn-mini" })|
+            </td>
+        </tr>
+    }
+</table>

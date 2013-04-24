@@ -10,7 +10,7 @@
     <h2>Answers</h2>
     @foreach (var item in ViewBag.Questions)
     {
-        <label>@item.question</label>
+        <label>@item.coso</label>
         <br />
         @Html.TextBoxFor(mmodel => mmodel.answer, new { type = "text" })
         <br />
