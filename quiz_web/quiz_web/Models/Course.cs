@@ -101,11 +101,11 @@ namespace quiz_web.Models
         public log Login(LoginModel model, bool persistCookie = false)
         {
             string url2 = "http://localhost:3000/courses/login.json?";
-            bool result = false;
+            //bool result = false;
             //string url2 = "http://localhost:3000/courses/login.json";
             //bool result = false;
             string ver = model.UserName.ToString();
-            var json = new Enlace().EjecutarAccion(url2 + "?username=" + model.UserName.ToString() + "&password=" + model.Password.ToString(), "GET");
+            var json = new Enlace().EjecutarAccion(url2 + "username=" + model.UserName.ToString() + "&password=" + model.Password.ToString(), "GET");
             var serializer = new JavaScriptSerializer();
             log result2 = serializer.Deserialize<log>(json);
             //if (result2.value)
