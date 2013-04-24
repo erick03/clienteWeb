@@ -15,8 +15,10 @@
         <br />
         @Html.TextBoxFor(mmodel => mmodel.answer, new { type = "text" })
         <br />
+         @Html.ActionLink("Send","AnswersNew", "Test",new { idTest = ViewBag.testID , idStudent = ViewBag.Student, idQues = item.ID},new { @class = "btn btn-danger btn-mini" })  
     }
-    @Html.ActionLink("Send","AnswersNew", "Test",new { idTest = ViewBag.testID },new { @class = "btn btn-danger btn-mini" })  
+      
+   
     <!--<p>
         <input class="btn btn-primary" type="submit" value="Create" />
     </p>-->

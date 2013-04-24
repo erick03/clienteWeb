@@ -32,6 +32,7 @@ namespace quiz_web.Controllers
         {
             List<Course> student_courses = dbStudent.get_courses(id);
             //Datos asociados a el curso
+            ViewBag.Student = id;
             ViewBag.studentsCourse = student_courses;
             return View();
         }

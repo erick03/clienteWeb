@@ -17,8 +17,9 @@ namespace quiz_web.Controllers
         //
         // GET: /Test/
 
-        public ActionResult Index(int idCourse = 0)
+        public ActionResult Index(int idCourse = 0 , int idStudent = 0)
         {
+            ViewBag.Student = idStudent; 
             ViewBag.Idcourse = idCourse;
             return View(db.info(idCourse));
         }
@@ -116,9 +117,15 @@ namespace quiz_web.Controllers
 
         //Carga las preguntas del quiz
         [ActionName("Answers")]
-        public ActionResult Answers(int id = 0)
+        public ActionResult Answers(int id = 0, int idStudent = 0)
         {
+            if (idStudent == 0)
+            {
+                return HttpNotFound();
+            }
             ViewBag.testID = id;
+            //var n = (((quiz_web.Models.log)(System.Web.HttpContext.Current.Session["usuario"])).identification);
+            ViewBag.Student = idStudent;
             //ViewBag.courseId = idCourse;
             ViewBag.Questions = dbQuestion.questionsTest(id);
             return View();
@@ -143,9 +150,13 @@ namespace quiz_web.Controllers
         }
 
         [ActionName("AnswersNew")]
-        public ActionResult AnswersNew(Answer answer,int idTest = 0)
+        public ActionResult AnswersNew(Answer answer, int idTest = 0, int idStudent = 0, int idQues =0)
         {
             ViewBag.testID = idTest;
+            answer.answer = "";
+            answer.test_id = idTest;
+            answer.student_id = idStudent;
+            answer.question_id = idQues;
             db.AnswersNew(answer);
             //ViewBag.courseId = idCourse;
             //ViewBag.Questions = dbQuestion.questionsTest(id);

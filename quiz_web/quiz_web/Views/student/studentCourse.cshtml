@@ -36,7 +36,7 @@
         <td>
             @item.description
         </td>
-        <td>@Html.ActionLink("Test", "Index", "Test", new { idCourse=item.ID }, new { @class = "btn btn-primary btn-mini" })</td>
+        <td>@Html.ActionLink("Test", "Index", "Test", new { idCourse=item.ID , idStudent = ViewBag.Student}, new { @class = "btn btn-primary btn-mini" })</td>
     </tr>
 }
 </table>

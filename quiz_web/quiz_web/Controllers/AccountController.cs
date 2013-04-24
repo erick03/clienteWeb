@@ -47,7 +47,7 @@ namespace quiz_web.Controllers
                 if (result.role.Equals("student"))
                 {
                     ViewBag.log = result;
-                    return RedirectToAction("studentCourse", "student", new { idStudent = result.identification });
+                    return RedirectToAction("studentCourse", "student", new { id = result.identification });
                 }
                 if (result.role.Equals("professor"))
                 {
