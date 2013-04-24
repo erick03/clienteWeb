@@ -1,0 +1,43 @@
+﻿@model quiz_web.Models.Result
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Result</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.grade)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.grade)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.note)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.note)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.test_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.test_id)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.student_id)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.student_id)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
