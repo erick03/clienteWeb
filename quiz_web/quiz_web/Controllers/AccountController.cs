@@ -37,18 +37,22 @@ namespace quiz_web.Controllers
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             log result = db.Login(model, persistCookie: model.RememberMe);
-            if (result.role.Equals("admin"))
+            if (result.role != null)
             {
-                return RedirectToAction("Index", "Home");
-            }
-            if (result.role.Equals("student"))
-            {
-                ViewBag.log = result;
-                return RedirectToAction("studentCourse", "student", new { idStudent = result.identification });
-            }
-            if (result.role.Equals("professor"))
-            {
-                return RedirectToAction("Index", "Home");
+                System.Web.HttpContext.Current.Session["usuario"] = result.role;
+                if (result.role.Equals("admin"))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                if (result.role.Equals("student"))
+                {
+                    ViewBag.log = result;
+                    return RedirectToAction("studentCourse", "student", new { idStudent = result.identification });
+                }
+                if (result.role.Equals("professor"))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario

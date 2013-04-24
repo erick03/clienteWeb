@@ -1,18 +1,28 @@
 ﻿<a class="brand" href="#">Quiz project</a>
-<ul class="nav pull-left bar-root">
-    <li >@Html.ActionLink("Students","Index", "student")</li>
-    <li >@Html.ActionLink("Professors", "Index", "professor")</li>
-    <li >@Html.ActionLink("Course", "Index", "Course")</li>
-</ul>
 <div class="group-menu nav-collapse">
     <ul class="nav pull-right">
         <li class="divider-vertical"></li>
     @if (Request.IsAuthenticated) {
         <li>
-            ¡Hola, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Administrar" })!
-            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
-                @Html.AntiForgeryToken()
-                <a href="javascript:document.getElementById('logoutForm').submit()">Cerrar sesión</a>
+            @if (((((quiz_web.Models.LoginModel)(System.Web.HttpContext.Current.Session["usuario"])) != null)))
+            {
+                <ul class="nav pull-left bar-root">
+                    if (((quiz_web.Models.log)(System.Web.HttpContext.Current.Session["usuario"])).role == "admin")
+                    {
+                            <li >@Html.ActionLink("Students","Index", "student")</li>
+                            <li >@Html.ActionLink("Professors", "Index", "professor")</li>
+                            <li >@Html.ActionLink("Course", "Index", "Course")</li>
+                    }
+                    if (((quiz_web.Models.log)(System.Web.HttpContext.Current.Session["usuario"])).role == "professor")
+                    {
+                            <li >@Html.ActionLink("Course", "Index", "Course")</li>
+                    }
+                    if (((quiz_web.Models.log)(System.Web.HttpContext.Current.Session["usuario"])).role == "student")
+                    {
+                            <li >@Html.ActionLink("Course", "Index", "Course")</li>
+                    }
+                </ul>
+            }
             }
         </li>
     } else {
