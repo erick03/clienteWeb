@@ -36,9 +36,19 @@ namespace quiz_web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && db.Login(model, persistCookie: model.RememberMe))
+            log result = db.Login(model, persistCookie: model.RememberMe);
+            if (result.role.Equals("admin"))
             {
-                return RedirectToLocal(returnUrl);
+                return RedirectToAction("Index", "Home");
+            }
+            if (result.role.Equals("student"))
+            {
+                ViewBag.log = result;
+                return RedirectToAction("studentCourse", "student", new { idStudent = result.identification });
+            }
+            if (result.role.Equals("professor"))
+            {
+                return RedirectToAction("Index", "Home");
             }
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario

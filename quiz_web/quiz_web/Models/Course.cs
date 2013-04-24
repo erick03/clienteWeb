@@ -18,6 +18,8 @@ namespace quiz_web.Models
     public class log
     {
         public bool value { get; set; }
+        public string role { get; set; }
+        public string identification { get; set; }
     }
     public class CourseDBcontext : DbContext
     {
@@ -96,22 +98,31 @@ namespace quiz_web.Models
         }
         #endregion
 
-        public bool Login(LoginModel model, bool persistCookie = false)
+        public log Login(LoginModel model, bool persistCookie = false)
         {
             string url2 = "http://localhost:3000/courses/login.json?";
             bool result = false;
+            //string url2 = "http://localhost:3000/courses/login.json";
+            //bool result = false;
             string ver = model.UserName.ToString();
-            var json = new Enlace().EjecutarAccion(url2 + "username=" + model.UserName.ToString() + "&password="
-                                                    + model.Password.ToString(), "GET");
+            var json = new Enlace().EjecutarAccion(url2 + "?username=" + model.UserName.ToString() + "&password=" + model.Password.ToString(), "GET");
             var serializer = new JavaScriptSerializer();
             log result2 = serializer.Deserialize<log>(json);
-            if (result2.value)
-            {
-                result = true;
-            }
-            else
-                result = false;
-            return result;
+            //if (result2.value)
+            //{
+                //ViewBag.log = log;
+                //return RedirectToAction("Index", "Home");
+            //    Course result = serializer.Deserialize<Course>(json);
+            //    result = true;
+            //}
+            //else
+            //    result = false;
+            return result2;
+        }
+
+        private bool RedirectToAction(string p1, string p2)
+        {
+            throw new NotImplementedException();
         }
 
         public Course find(int id)

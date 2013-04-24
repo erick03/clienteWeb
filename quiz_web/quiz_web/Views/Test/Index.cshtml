@@ -55,7 +55,8 @@
         </td>
         <td>
             @Html.ActionLink("Questions","Index", "Questions", new { id=item.ID , idCourse = item.course_id }, new { @class = "btn btn-primary btn-mini" })
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-danger btn-mini" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID }, new { @class = "btn btn-danger btn-mini" })|
+            @Html.ActionLink("Answers", "Answers", new { id=item.ID }, new { @class = "btn btn-primary btn-mini" })|
         </td>
     </tr>
 }

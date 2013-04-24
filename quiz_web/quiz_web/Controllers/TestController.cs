@@ -12,6 +12,7 @@ namespace quiz_web.Controllers
     public class TestController : Controller
     {
         private TestDBcontext db = new TestDBcontext();
+        private QuestionsDBcontext dbQuestion = new QuestionsDBcontext();
         int variable = 0;
         //
         // GET: /Test/
@@ -112,6 +113,17 @@ namespace quiz_web.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", new { idCourse = test.course_id });
         }
+
+        //Carga las preguntas del quiz
+        [ActionName("Answers")]
+        public ActionResult Answers(int id = 0)
+        {
+            ViewBag.testID = id;
+            //ViewBag.courseId = idCourse;
+            ViewBag.Questions = dbQuestion.questionsTest(id);
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -35,6 +35,13 @@ namespace quiz_web.Controllers
             ViewBag.studentsCourse = student_courses;
             return View();
         }
+        private TestDBcontext dbT = new TestDBcontext();
+        [ActionName("Quiz")]
+        public ActionResult Quiz(int id = 1)
+        {
+            
+            return View(dbT.info(id));
+        }
         //
         // GET: /student/Details/5
 

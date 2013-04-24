@@ -1,6 +1,18 @@
-﻿@{
+﻿@model quiz_web.Models.Answer
+
+@{
     ViewBag.Title = "Answers";
     Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
 }
 
-<h2>Answers</h2>
+
+<fieldset>
+    <h2>Answers</h2>
+    @foreach (var item in ViewBag.Questions)
+    {
+        <label>@item.question</label>
+        <br />
+        @Html.TextBoxFor(mmodel => mmodel.answer, new { type = "text" })
+        <br />
+    }
+</fieldset>
