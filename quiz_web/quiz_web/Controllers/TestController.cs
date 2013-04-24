@@ -124,6 +124,16 @@ namespace quiz_web.Controllers
             return View();
         }
 
+        [ActionName("AnswersNew")]
+        public ActionResult AnswersNew(Answer answer,int idTest = 0)
+        {
+            ViewBag.testID = idTest;
+            db.AnswersNew(answer);
+            //ViewBag.courseId = idCourse;
+            //ViewBag.Questions = dbQuestion.questionsTest(id);
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

@@ -23,6 +23,7 @@ namespace quiz_web.Models
     {
         public DbSet<Test> Test { get; set; }
         private string url = "http://localhost:3000/tests";
+        private string urlAnswer = "http://localhost:3000/answers";
         //public student student = new student();
         private string data = ".json";
 
@@ -58,6 +59,12 @@ namespace quiz_web.Models
         {
             return new JavaScriptSerializer().Deserialize<Test>(
             new Enlace().EjecutarAccion(url + "/" + test.ID.ToString() + data, "DELETE", test));
+        }
+
+        public Answer AnswersNew(Answer answer)
+        {
+            return new JavaScriptSerializer().Deserialize<Answer>(
+            new Enlace().EjecutarAccion(urlAnswer + ".json", "POST", answer));
         }
     }
 }
