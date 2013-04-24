@@ -46,10 +46,10 @@ namespace quiz_web.Models
             return result;
         }
 
-        public Questions create(Questions questions)
+        public Questions create(Questions question)
         {
             return new JavaScriptSerializer().Deserialize<Questions>(
-            new Enlace().EjecutarAccion(url + ".json", "POST", questions));
+            new Enlace().EjecutarAccion(url + ".json", "POST", question));
         }
 
         public Questions edit(Questions questions)
