@@ -150,17 +150,40 @@ namespace quiz_web.Controllers
         }
 
         [ActionName("AnswersNew")]
-        public ActionResult AnswersNew(Answer answer, int idTest = 0, int idStudent = 0, int idQues =0)
+        public ActionResult AnswersNew(Answer answer, int idTest = 0, int idStudent = 0, int idQues = 0)
         {
             ViewBag.testID = idTest;
-            answer.answer = "";
+            answer.coso = "";
             answer.test_id = idTest;
             answer.student_id = idStudent;
             answer.question_id = idQues;
-            db.AnswersNew(answer);
+           
             //ViewBag.courseId = idCourse;
             //ViewBag.Questions = dbQuestion.questionsTest(id);
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Response()
+        {
+            if (ModelState.IsValid)
+            {
+                string answer = Request["coso"];
+                int idPregunta = Convert.ToInt32(Request["question_id"]);
+                int student_id = Convert.ToInt32(Request["student_id"]);
+                int test_id = Convert.ToInt32(Request["test_id"]);
+
+                Answer ResultAnswer = new Answer();
+                ResultAnswer.question_id = idPregunta;
+                ResultAnswer.student_id = student_id;
+                ResultAnswer.test_id = test_id;
+                ResultAnswer.coso = answer;
+                var pregunta = db.AnswersNew(ResultAnswer);
+                return RedirectToAction("Answers", "Answers", new { id = test_id, idStudent = student_id });
+                //return RedirectToAction("IndexEstudiante", new { id = test_id, idEst = student_id });
+            }
+            return RedirectToAction("Index");
+            //return RedirectToAction("Answers", "Answers", new { id = test_id, idStudent = student_id });
         }
 
         protected override void Dispose(bool disposing)
