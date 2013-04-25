@@ -82,7 +82,7 @@ namespace quiz_web.Models
 
         public void DeleteProfessorCourse(int idProfessor, int idCourse)
         {
-            new Enlace().EjecutarAccion("http://localhost:3000/course_professor/delete_row.json?course_id=" + idCourse + "&professor_id=" + idProfessor, "GET");
+            new Enlace().EjecutarAccion("http://localhost:3000/course_professors/delete_row.json?course_id=" + idCourse + "&professor_id=" + idProfessor, "GET");
         }
 
         public void AddStudentCourse(datosAsocia a)

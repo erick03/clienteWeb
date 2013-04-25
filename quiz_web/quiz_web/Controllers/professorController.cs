@@ -25,7 +25,15 @@ namespace quiz_web.Controllers
 
         //
         // GET: /professor/Details/5
-
+        [ActionName("professorCourse")]
+        public ActionResult studentCourse(int id = 1)
+        {
+            List<Course> student_courses = db.get_courses(id);
+            //Datos asociados a el curso
+            ViewBag.Student = id;
+            ViewBag.studentsCourse = student_courses;
+            return View();
+        }
         public ActionResult Details(int id = 0)
         {
             professors professor = new professors();

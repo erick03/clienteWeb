@@ -32,6 +32,13 @@ namespace quiz_web.Models
             List<professors> result = serializer.Deserialize<List<professors>>(json);
             return result;
         }
+        public List<Course> get_courses(int id)
+        {
+            var json = new Enlace().EjecutarAccion("http://localhost:3000/courses/get_courses_professor.json?id=" + id, "GET");
+            var serializer = new JavaScriptSerializer();
+            List<Course> result = serializer.Deserialize<List<Course>>(json);
+            return result;
+        }
         //
         public professors find(int id)
         {

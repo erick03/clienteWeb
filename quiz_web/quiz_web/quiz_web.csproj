@@ -344,6 +344,8 @@
     <Content Include="Views\Result\Create.cshtml" />
     <Content Include="Views\Result\Edit.cshtml" />
     <Content Include="Views\Result\Delete.cshtml" />
+    <Content Include="Views\student\studentCourse.cshtml" />
+    <Content Include="Views\professor\professorCourse.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

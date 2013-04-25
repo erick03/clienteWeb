@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "professorCourses";
+}
+
+<h2>professorCourses</h2>
+@model IEnumerable<quiz_web.Models.Course>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_BootstrapLayout.cshtml";
+}
+
+<table class ="table table-striped table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>Quiz</th>
+    </tr>
+
+@foreach (var item in ViewBag.studentsCourse)
+{
+    <tr>
+        <td>
+            @item.code
+        </td>
+        <td>
+            @item.name
+        </td>
+        <td>
+            @item.description
+        </td>
+        <td>@Html.ActionLink("Test", "Index", "Test", new { idCourse=item.ID , idStudent = ViewBag.Student}, new { @class = "btn btn-primary btn-mini" })</td>
+    </tr>
+}
+</table>
