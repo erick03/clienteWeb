@@ -41,7 +41,7 @@
                 @item.lastname
             </td>
             <td>
-                @Html.ActionLink("Qualify", "questionAnswers","ResultController", new { id=item.ID,  test_id = @ViewBag.test_id }, new { @class = "btn btn-primary btn-mini" })|
+                @Html.ActionLink("Qualify", "Create", "Result", new { student_id = item.ID, test_id = ViewBag.testID }, new { @class = "btn btn-primary btn-mini" })|
             </td>
         </tr>
     }

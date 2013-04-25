@@ -18,7 +18,7 @@ namespace quiz_web.Controllers
     {
         private CourseDBcontext db = new CourseDBcontext();
         private studentsDBContext dbStudent = new studentsDBContext();
-        private string url = "http://localhost:3000/";
+        //private string url = "http://localhost:3000/";
         //
         // GET: /student/
         public ActionResult Index()

@@ -47,19 +47,19 @@ namespace quiz_web.Models
             return result;
         }
 
-        public List<Questions> questionsTest(int id)
+        public List<Questions> questionsTest(int test_id)
         {
             //1
-            var json = new Enlace().EjecutarAccion("http://localhost:3000/tests/get_questions.json?test_id="+id, "GET");
+            var json = new Enlace().EjecutarAccion("http://localhost:3000/tests/get_questions.json?test_id=" + test_id, "GET");
             var serializer = new JavaScriptSerializer();
             List<Questions> result = serializer.Deserialize<List<Questions>>(json);
             return result;
         }
 
-        public List<Answers> answersTest(int id, int student_id)
+        public List<Answers> answersTest(int student_id, int test_id)
         {
             //1
-            var json = new Enlace().EjecutarAccion("http://localhost:3000/tests/get_answers.json?test_id=" + id + "&student_id=" + student_id, "GET");
+            var json = new Enlace().EjecutarAccion("http://localhost:3000/tests/get_answers.json?student_id=" + student_id + "&test_id=" + test_id, "GET");
             var serializer = new JavaScriptSerializer();
             List<Answers> result = serializer.Deserialize<List<Answers>>(json);
             return result;

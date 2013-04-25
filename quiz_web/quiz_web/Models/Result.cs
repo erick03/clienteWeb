@@ -33,7 +33,7 @@ namespace quiz_web.Models
         public Result create(Result result)
         {
             return new JavaScriptSerializer().Deserialize<Result>(
-            new Enlace().EjecutarAccion(url + ".json", "POST", result));
+            new Enlace().EjecutarAccion("http://localhost:3000/results.json", "POST", result));
         }
 
         public DbSet<Result> Results { get; set; }

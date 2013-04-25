@@ -1,10 +1,10 @@
 ﻿@model quiz_web.Models.Result
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Qualify";
 }
 
-<h2>Create</h2>
+<h2>Qualify</h2>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
@@ -49,22 +49,26 @@
         </p>
     </fieldset>
 }
-
-@foreach (var item in ViewBag.Questions)
-{
-    <label><strong>@item.coso</strong></label>
-    <br />
-    <label></label>
-    <br />
-}
-
-@foreach (var item2 in ViewBag.Answers)
-{
-    <label><strong>@item2.answer</strong></label>
-    <br />
-    <label></label>
-    <br />
-}
+<div class="span10 well">
+    <div class="span5">
+        <legend>Questions</legend>
+        <ol>
+        @foreach (var item3 in ViewBag.Questions)
+        {
+            <li><label><strong>@item3.coso</strong></label></li>
+        }
+        </ol>
+    </div>
+    <div class="span5">
+        <legend>Answers</legend>
+        <ol>         
+        @foreach (var item2 in ViewBag.Answers)
+        {
+            <li><label>@item2.answer</label></li>
+        }
+        </ol>
+    </div>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")

@@ -14,7 +14,7 @@ namespace quiz_web.Controllers
     public class professorController : Controller
     {
         private professorsDBContext db = new professorsDBContext();
-        private string url = "http://localhost:3000/";
+        //private string url = "http://localhost:3000/";
         //
         // GET: /professor/
 

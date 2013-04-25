@@ -17,7 +17,6 @@ namespace quiz_web.Controllers
         //
         // GET: /Result/
 
-
         public ActionResult Index()
         {
             return View(db.Results.ToList());
@@ -38,14 +37,20 @@ namespace quiz_web.Controllers
 
         //
         // GET: /Result/Create
-        [ActionName("questionsAnswers")]
-        public ActionResult Create(int student_id = 0, int test_id = 0)
+        /*
+        public ActionResult Create()
+        {
+            return View();
+        }
+        */
+        // GET: /Result/Create
+        public ActionResult Create(int student_id, int test_id)
         {
             ViewBag.student_id = student_id;
             ViewBag.test_id = test_id;
             ViewBag.Questions = dbQuestion.questionsTest(test_id);
-            ViewBag.Answers = dbQuestion.answersTest(test_id, student_id);
-            return View();
+            ViewBag.Answers = dbQuestion.answersTest(student_id, test_id);
+            return View("Create");
         }
 
         //
@@ -58,9 +63,9 @@ namespace quiz_web.Controllers
             {
                 db.create(result);
                 db.SaveChanges();
-                return RedirectToAction("StudentsThatAnswer","TestController", new { idCourse = result.test_id });
+                return RedirectToAction("StudentsThatAnswer", "Test", new { id = result.test_id });
             }
-            return RedirectToAction("StudentsThatAnswer", "TestController", new { idCourse = result.test_id });
+            return RedirectToAction("StudentsThatAnswer", "Test", new { id = result.test_id });
         }
 
         //

@@ -13,7 +13,7 @@ namespace quiz_web.Controllers
     {
         private TestDBcontext db = new TestDBcontext();
         private QuestionsDBcontext dbQuestion = new QuestionsDBcontext();
-        int variable = 0;
+        //int variable = 0;
         //
         // GET: /Test/
 
@@ -130,7 +130,7 @@ namespace quiz_web.Controllers
             ViewBag.Questions = dbQuestion.questionsTest(id);
             return View();
         }
-
+        /*
         [ActionName("Qualify")]
         public ActionResult Qualify(int id = 0)
         {
@@ -140,7 +140,7 @@ namespace quiz_web.Controllers
             ViewBag.Answers = dbQuestion.answersTest(id, 0);
             return View();
         }
-
+        */
         [ActionName("StudentsThatAnswer")]
         public ActionResult StudentsThatAnswer(int id = 0)
         {
