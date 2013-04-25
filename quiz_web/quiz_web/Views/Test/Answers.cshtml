@@ -6,21 +6,20 @@
 }
 
 
-@using (Html.BeginForm()) {
-  <fieldset>
-        <legend>Answers</legend>
-    @foreach (var item in ViewBag.Questions)
-    {
-        <label>@item.coso</label>
-        <br />
-        @Html.TextBoxFor(mmodel => mmodel.answer, new { type = "text" })
-        <br />
-         @Html.ActionLink("Send","AnswersNew", "Test",new { idTest = ViewBag.testID , idStudent = ViewBag.Student, idQues = item.ID},new { @class = "btn btn-danger btn-mini" })  
-    }
-      
-   
-    <!--<p>
-        <input class="btn btn-primary" type="submit" value="Create" />
-    </p>-->
-</fieldset>
+<Strong>Answers</Strong>
+@foreach (var item in ViewBag.Questions)
+{   
+    <label>@item.coso</label>
+<form action="/Test/Response" method ="post">
+    <input id="question_id" name="question_id" type="hidden" value="@item.ID" />
+    <input id="student_id" name="student_id" type="hidden" value="@ViewBag.Student" /> 
+    <input id="test_id" name="test_id" type="hidden" value="@ViewBag.testID" />       
+    <input id="coso" name="coso" type="text" />
+    <input id="response" name="response" type="submit" value="Send" />
+</form>
 }
+
+
+
+<!--@Html.ActionLink("Send","AnswersNew", "Test",new { idTest = ViewBag.testID},
+new { @class = "btn btn-danger btn-mini" })-->

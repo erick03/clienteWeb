@@ -51,7 +51,7 @@ namespace quiz_web.Controllers
                 }
                 if (result.role.Equals("professor"))
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home", new { id = result.identification });
                 }
             }
 
